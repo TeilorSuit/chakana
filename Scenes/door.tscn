@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://cogdyhf2244wl"]
+
+[ext_resource type="Script" uid="uid://bidgmqp3ybgxb" path="res://Scripts/door.gd" id="1_p0e35"]
+[ext_resource type="Texture2D" uid="uid://bcs2lxxk4qwf6" path="res://Assets/variados/puertaRejasAnimacion.png" id="2_p0e35"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab4ky"]
+size = Vector2(25, 48)
+
+[sub_resource type="Animation" id="Animation_p0e35"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fahql"]
+resource_name = "abrir"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.56666666, 0.8666667, 1.1666666, 1.4666667, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"desactivar_fisica"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ab4ky"]
+_data = {
+&"RESET": SubResource("Animation_p0e35"),
+&"abrir": SubResource("Animation_fahql")
+}
+
+[node name="Door" type="StaticBody2D"]
+script = ExtResource("1_p0e35")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_p0e35")
+hframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ab4ky")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ab4ky")
+}

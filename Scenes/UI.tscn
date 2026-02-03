@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://x2t2ej2cbrrv"]
+
+[ext_resource type="Script" uid="uid://brwdapsuicfcb" path="res://ui.gd" id="1_nxvpl"]
+[ext_resource type="Texture2D" uid="uid://cxnw80oss8iu6" path="res://Assets/chakana parts/chakana p3.png" id="1_w371h"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_nxvpl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 104.0
+offset_bottom = 43.0
+
+[node name="Node2D" type="Node2D" parent="Control"]
+position = Vector2(18, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Node2D"]
+position = Vector2(49, 6.999998)
+scale = Vector2(1.3437485, 1.2812499)
+texture = ExtResource("1_w371h")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 10
+text = "TEST"

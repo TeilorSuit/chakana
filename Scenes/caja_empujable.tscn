@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvmfndsv3bnao"]
+
+[ext_resource type="Texture2D" uid="uid://csp3ttll7gh1j" path="res://Assets/variados/caja.png" id="1_2irq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ls0me"]
+size = Vector2(30, 30)
+
+[node name="CajaEmpujable" type="RigidBody2D" groups=["caja", "normal"]]
+mass = 0.5
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 0.7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2irq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ls0me")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf432o63kwayt"]
+
+[ext_resource type="Script" uid="uid://dywytxg1yeubf" path="res://Scripts/placa_roja.gd" id="1_elr1a"]
+[ext_resource type="Texture2D" uid="uid://f5tnvt0ivk6q" path="res://Assets/variados/placaRoja.png" id="1_g6hmc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elr1a"]
+size = Vector2(16, 4)
+
+[node name="PlacaRoja" type="Area2D"]
+script = ExtResource("1_elr1a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g6hmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_elr1a")

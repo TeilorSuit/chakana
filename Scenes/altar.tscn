@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccy6p6ob0wf38"]
+
+[ext_resource type="Texture2D" uid="uid://133xufgqsqq1" path="res://Assets/variados/altar-Sheet.png" id="1_qtrpd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0d7v"]
+atlas = ExtResource("1_qtrpd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brtn5"]
+atlas = ExtResource("1_qtrpd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc5rp"]
+atlas = ExtResource("1_qtrpd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y47gv"]
+atlas = ExtResource("1_qtrpd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62brk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0d7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brtn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gc5rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y47gv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtrpd"]
+size = Vector2(23.5, 17)
+
+[node name="altar" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_62brk")
+autoplay = "default"
+frame_progress = 0.015739532
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 7.5)
+shape = SubResource("RectangleShape2D_qtrpd")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://3hb5g6jdledo"]
+
+[ext_resource type="Texture2D" uid="uid://bcm47t55103nr" path="res://Assets/level1/rocasColeccionables.png" id="1_65478"]
+[ext_resource type="Script" uid="uid://buw7q5nhhsqj5" path="res://Scripts/roca_subsuelo.gd" id="1_ogfmq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogfmq"]
+size = Vector2(14, 14)
+
+[node name="roca" type="Area2D"]
+script = ExtResource("1_ogfmq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_65478")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ogfmq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
