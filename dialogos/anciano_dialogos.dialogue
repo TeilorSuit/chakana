@@ -1,0 +1,94 @@
+~ inicio_nivel_1
+
+if not Data.hablado_anciano_m1:
+	Anciano: Bienvenido, pequeño Sami... Te he estado esperando.
+	Sami: ¿Sami? ¿Quién es usted? ¿Dónde estoy?
+	Anciano: Estás en el Uku Pacha, el mundo de abajo... Un lugar de oscuridad, pero también donde residen las semillas de la vida.
+	Anciano: El equilibrio de nuestro universo ha sido quebrado por una sombra antigua. La Pachamama, en su último aliento de esperanza, te ha dado forma a ti.
+	Sami: ¿A mí? No sé de qué estás hablando...
+	Anciano: Eres la semilla que restaurará el orden. Pero no puedes hacerlo con las manos vacías. Debes reunir los fragmentos de la Chakana, el símbolo sagrado.
+	Anciano: Encontrarás el primer fragmento oculto en las alturas de este mundo. Asciende, busca el símbolo del equilibrio y demuestra tu valía.
+	set Data.hablado_anciano_m1 = true
+	=> END
+else:
+	if not Data.leyo_cartel_balanza:
+		Anciano: Tu camino recién empieza, Sami. Busca el símbolo del equilibrio en las alturas para poder avanzar.
+		=> END
+	elif not Data.puzzle_resuelto:
+		Anciano: Has encontrado la balanza... Sabes lo que debes hacer. Busca las piedras y restaura su equilibrio.
+		=> END
+	else:
+		Anciano: Siento cómo la tierra bajo nuestros pies vuelve a respirar. Has restaurado el equilibrio del Uku Pacha, pequeño Sami.
+		Anciano: No te detengas ahora, sigue ascendiendo hacia la luz. El Kay Pacha te aguarda.
+		=> END
+
+
+
+
+~ inicio_nivel_2
+
+if not Data.hablado_anciano_m2:
+	Anciano: Has ascendido al Kay Pacha, el mundo terrenal...
+	Sami: Hay más luz aquí... pero las corrientes de agua están completamente quietas. Todo está en silencio.
+	Anciano: El cauce ha sido ahogado por La Entidad. Esa sombra antigua que sentiste en el subsuelo está secando las raíces de este mundo.
+	Anciano: Necesito tu ayuda, pequeña semilla. Cruza ese portal; te llevará a una cueva profunda. 
+	Anciano: Allí dentro crece el Fruto de Yaku. Solo podrás alcanzarlo si logras devolverle el movimiento al agua. Tráemelo, es vital para restaurar el flujo aquí afuera.
+	set Data.hablado_anciano_m2 = true
+	=> END
+else:
+	if not Data.tiene_fruto_yaku and not Data.entrego_fruto_m2:
+		Anciano: El portal te aguarda, Sami. Adéntrate en la cueva y tráeme el Fruto de Yaku.
+		=> END
+	elif Data.tiene_fruto_yaku and not Data.entrego_fruto_m2:
+		Sami: ¡El agua volvió a fluir dentro de la cueva! Aquí tienes el fruto que me pediste.
+		Anciano: Excelente... Siento cómo la vida retorna lentamente al Kay Pacha. Gracias, valiente Sami.
+		Anciano: Como muestra de mi gratitud, toma esto. Lo encontré tirado por ahí hace tiempo, seguro te será de más utilidad a ti.
+		do Data.dar_chakana_recompensa()
+		Sami: ¡Es otro fragmento de la Chakana!
+		Anciano: Así es. Úsalo para abrir la siguiente puerta. La Entidad se debilita con cada paso que das.
+		set Data.entrego_fruto_m2 = true
+		=> END
+	else:
+		Anciano: Tu camino sigue hacia arriba, Sami. La puerta ya no es un obstáculo. Tu destino te espera en el mundo superior.
+		=> END
+
+
+
+~ inicio_nivel_3
+
+if not Data.hablado_anciano_m3:
+	Anciano: Has llegado a lo más alto, Sami. Al Hanan Pacha, el mundo superior... el cielo.
+	Sami: Se siente una energía muy pesada... Y no hay luz, el cielo está completamente vacío.
+	Anciano: La Entidad se esconde aquí. Para dejarnos en la oscuridad, ha movido al Sol y a la Luna de sus lugares.
+	Anciano: Solo te falta un fragmento de la Chakana. Para que aparezca, debes empujar las cajas del Sol y la Luna sobre sus respectivos botones.
+	Anciano: Resuelve este último enigma. Cuando el orden vuelva, la Chakana estará completa y podrás hacerle frente a la sombra.
+	set Data.hablado_anciano_m3 = true
+	=> END
+else:
+	if not Data.puzzle_cajas_resuelto:
+		Anciano: El cielo sigue oscuro, Sami. Empuja las cajas del Sol y la Luna sobre sus botones para restaurar el orden.
+		=> END
+	elif Data.chakana_parts < 3:
+		Anciano: ¡La luz ha vuelto! Pero aún necesitas recoger el último fragmento de la Chakana. Búscalo, debe estar cerca.
+		=> END
+	else:
+		Anciano: ¡El cielo vuelve a brillar! Has restaurado el equilibrio de los tres mundos, pequeña semilla.
+		Sami: ¡La Chakana... está brillando! Siento una fuerza increíble.
+		Anciano: Está completa. Ahora portas el poder de la Pachamama. La Entidad ya no es invencible a tus ataques.
+		Anciano: Ve, valiente Sami. Cruza la última puerta y libera nuestro universo de esta sombra. ¡Confiamos en ti!
+		=> END
+		
+		
+~ cartel_balanza
+
+Cartel: "El equilibrio es la clave. Tres cargas a la derecha, tres cargas a la izquierda. Solo así el camino se revelará."
+set Data.leyo_cartel_balanza = true
+=> END
+
+~ cartel_bloqueado
+Sami: Tiene unos símbolos muy antiguos grabados en la piedra... No entiendo qué significan.
+Sami: Quizás alguien en este lugar pueda ayudarme.
+=> END
+
+~ portal_bloqueado
+Sami: Ese portal se ve peligroso. Mejor investigo un poco más antes de entrar.

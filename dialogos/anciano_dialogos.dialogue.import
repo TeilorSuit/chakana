@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c8jkwta1yxxtu"
+path="res://.godot/imported/anciano_dialogos.dialogue-215a8f67430ff8fbc85a802dda968485.tres"
+
+[deps]
+
+source_file="res://dialogos/anciano_dialogos.dialogue"
+dest_files=["res://.godot/imported/anciano_dialogos.dialogue-215a8f67430ff8fbc85a802dda968485.tres"]
+
+[params]
+
+defaults=true

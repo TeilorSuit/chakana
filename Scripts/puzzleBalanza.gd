@@ -6,10 +6,9 @@ extends Area2D
 
 @onready var sprite_balanza = $Sprite2D
 
-var puzzle_resuelto = false
 
 func _on_body_entered(body):
-	if puzzle_resuelto:
+	if Data.puzzle_resuelto:
 		return
 
 	if body.name == "Player" and Data.rocas_coleccionadas >= 3:
@@ -20,7 +19,7 @@ func _on_body_entered(body):
 		
 		Data.door_unlocked.emit(puerta_a_abrir_id)
 		
-		puzzle_resuelto = true
+		Data.puzzle_resuelto = true
 		print("balanza resuelta")
 		# Opcional: desactivar la colisión para que no vuelva a detectar
 		# $CollisionShape2D.set_deferred("disabled", true) 

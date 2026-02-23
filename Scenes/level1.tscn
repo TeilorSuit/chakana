@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dida56mprwyes"]
+[gd_scene load_steps=22 format=4 uid="uid://dida56mprwyes"]
 
 [ext_resource type="Texture2D" uid="uid://thqiq44v3gd8" path="res://Assets/level1/nivel1 tileset.png" id="2_c5erv"]
 [ext_resource type="PackedScene" uid="uid://cj7b3m4offpny" path="res://Scenes/Player.tscn" id="2_vly50"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://3hb5g6jdledo" path="res://Scenes/rocaSubsuelo.tscn" id="14_u1b78"]
 [ext_resource type="PackedScene" uid="uid://ccy6p6ob0wf38" path="res://Scenes/altar.tscn" id="15_bdr3p"]
 [ext_resource type="PackedScene" uid="uid://cm5vq1ihqyunr" path="res://Scenes/levelChange.tscn" id="16_wwu6c"]
+[ext_resource type="PackedScene" uid="uid://nwv7hqpihs3n" path="res://Scenes/cartel_balanza.tscn" id="17_yymuf"]
+[ext_resource type="Resource" uid="uid://c8jkwta1yxxtu" path="res://dialogos/anciano_dialogos.dialogue" id="18_esggg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyd6k"]
 texture = ExtResource("2_c5erv")
@@ -87,7 +89,8 @@ position = Vector2(548, 657)
 scale = Vector2(1.2641284, 1.4856626)
 
 [node name="oldNpc" parent="." instance=ExtResource("6_didp7")]
-position = Vector2(1587, 553)
+position = Vector2(1586, 553)
+archivo_dialogo = ExtResource("18_esggg")
 
 [node name="background" type="Node2D" parent="."]
 
@@ -152,16 +155,21 @@ position = Vector2(1818, 208)
 my_door_id = 50
 
 [node name="roca" parent="." instance=ExtResource("14_u1b78")]
-position = Vector2(1975, 434)
+position = Vector2(1978, 434)
+rotation = 0.31300047
 
 [node name="roca2" parent="." instance=ExtResource("14_u1b78")]
-position = Vector2(1031, 529)
+position = Vector2(1030, 530)
 
 [node name="roca3" parent="." instance=ExtResource("14_u1b78")]
-position = Vector2(1624, 559)
+position = Vector2(1626, 562)
 
 [node name="cambio" parent="." instance=ExtResource("16_wwu6c")]
 position = Vector2(2327, 106)
 next_scene_path = "res://Scenes/level2.tscn"
+
+[node name="CartelBalanza" parent="." instance=ExtResource("17_yymuf")]
+position = Vector2(1684, 216)
+archivo_dialogo = ExtResource("18_esggg")
 
 [connection signal="body_entered" from="PuzzleBalanza" to="PuzzleBalanza" method="_on_body_entered"]

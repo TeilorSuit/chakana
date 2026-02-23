@@ -6,7 +6,6 @@ extends Node2D
 var placa_sol_lista = false
 var placa_luna_lista = false
 var placa_normal_lista = false
-var ya_ganamos = false
 
 # Referencias a las CAJAS 
 @onready var caja_sol = $CajaEmpujableSol
@@ -39,14 +38,13 @@ func _on_placa_normal_estado_cambiado(activa):
 	verificar_victoria()
 	
 func verificar_victoria():
-	if ya_ganamos:
+	if Data.puzzle_cajas_resuelto:
 		return
 		
 	if placa_sol_lista and placa_luna_lista and placa_normal_lista:
 		print("¡PUZZLE RESUELTO!")
 		Data.door_unlocked.emit(puerta_id)
-		
-		ya_ganamos = true
+		Data.puzzle_cajas_resuelto = true
 
 # --- FUNCIÓN DE RESET ROBUSTA ---
 func _on_palanca_reset_activada():

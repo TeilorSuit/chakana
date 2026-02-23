@@ -85,6 +85,7 @@ animations = [{
 size = Vector2(25, 27)
 
 [node name="portal" type="Area2D"]
+z_index = -1
 script = ExtResource("1_oi2tk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
