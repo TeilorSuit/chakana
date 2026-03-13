@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx2m5jq4v3357"]
+
+[ext_resource type="Texture2D" uid="uid://c046bssenexii" path="res://Assets/variados/explosion bullet-Sheet.png" id="1_xwh6b"]
+[ext_resource type="Script" uid="uid://cxm3fsjpua4je" path="res://Scripts/impacto_bala.gd" id="2_euoh7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euoh7"]
+atlas = ExtResource("1_xwh6b")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57mkr"]
+atlas = ExtResource("1_xwh6b")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejdil"]
+atlas = ExtResource("1_xwh6b")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvqdp"]
+atlas = ExtResource("1_xwh6b")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0r6u"]
+atlas = ExtResource("1_xwh6b")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_81sab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euoh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57mkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejdil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvqdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0r6u")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="ImpactoBala" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_81sab")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+script = ExtResource("2_euoh7")

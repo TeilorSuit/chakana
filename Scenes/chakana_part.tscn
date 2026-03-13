@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cis3diamjl2x3"]
 
 [ext_resource type="Script" uid="uid://e3u78tnntwbv" path="res://Scripts/chakana_part.gd" id="1_7ldr6"]
-[ext_resource type="Texture2D" uid="uid://c25tkckmwldei" path="res://Assets/chakana parts/chakana p1.png" id="2_jcrdy"]
+[ext_resource type="Texture2D" uid="uid://c1x1o4b8cx26r" path="res://Assets/chakana parts/chakana p1.png" id="2_jcrdy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enmru"]
 size = Vector2(16, 16)
 
 [node name="chakana part" type="Area2D"]
 script = ExtResource("1_7ldr6")
+part_texture = ExtResource("2_jcrdy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jcrdy")

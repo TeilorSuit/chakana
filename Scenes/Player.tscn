@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cj7b3m4offpny"]
+[gd_scene format=3 uid="uid://cj7b3m4offpny"]
 
 [ext_resource type="Script" uid="uid://3b2n4lo2ccf4" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://b3acf4fde16ml" path="res://Assets/player/character idle.png" id="2_5ixxa"]
 [ext_resource type="AudioStream" uid="uid://e8vo4hx75y7c" path="res://Assets/sounds/jump_sound.mp3" id="3_gntrk"]
 [ext_resource type="Texture2D" uid="uid://b4iiv7480l87e" path="res://Assets/player/character jump.png" id="3_nn08x"]
 [ext_resource type="Texture2D" uid="uid://6g11ycpetm8r" path="res://Assets/player/player walk.png" id="4_5ixxa"]
+[ext_resource type="AudioStream" uid="uid://pt6spjav34oy" path="res://Assets/sounds/disparo.wav" id="6_nn08x"]
+[ext_resource type="AudioStream" uid="uid://b7fg5kedfofal" path="res://Assets/sounds/golpeSamiHit.mp3" id="7_52ee3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhhdu"]
 atlas = ExtResource("2_5ixxa")
@@ -73,22 +75,39 @@ animations = [{
 radius = 7.0
 height = 28.0
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=363835454 groups=["Player"]]
 script = ExtResource("1_kyqiw")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1299898924]
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_glx4g")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=624255113]
 position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_kyqiw")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=576212798]
 offset = Vector2(0, -10)
 
-[node name="jumpSound" type="AudioStreamPlayer2D" parent="."]
+[node name="DañoFlash" type="ColorRect" parent="Camera2D" unique_id=1385524709]
+offset_left = -388.0
+offset_top = -273.0
+offset_right = 388.0
+offset_bottom = 207.0
+color = Color(1.269618, 0, 0, 0)
+
+[node name="jumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1974224930]
 stream = ExtResource("3_gntrk")
+volume_db = -25.0
+
+[node name="DisparoSound" type="AudioStreamPlayer2D" parent="." unique_id=771379405]
+stream = ExtResource("6_nn08x")
+volume_db = -10.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=61448174]
+stream = ExtResource("7_52ee3")
 volume_db = -20.0
+
+[node name="PasosSound" type="AudioStreamPlayer2D" parent="." unique_id=2034822852]

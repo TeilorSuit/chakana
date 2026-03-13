@@ -1,12 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckvgyvclnwggo"]
+[gd_scene load_steps=4 format=3 uid="uid://ckvgyvclnwggo"]
 
 [ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="1_cital"]
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="1_vdugj"]
+
+[sub_resource type="Theme" id="Theme_opjls"]
+default_font = ExtResource("1_vdugj")
+default_font_size = 15
 
 [node name="DialogueLabel" type="RichTextLabel"]
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 mouse_filter = 1
+theme = SubResource("Theme_opjls")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

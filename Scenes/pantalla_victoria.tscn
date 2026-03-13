@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://co1w7pucdjya6"]
+
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="1_ey6n7"]
+[ext_resource type="Script" uid="uid://dpbi1yusshg6r" path="res://Scripts/pantalla_victoria.gd" id="1_fof3l"]
+[ext_resource type="Texture2D" uid="uid://ce3qrekp3vp7g" path="res://Assets/mainmenu/botonHome.png" id="2_fof3l"]
+[ext_resource type="Texture2D" uid="uid://c8ber86w8hb47" path="res://Assets/mainmenu/botonHomePressed.png" id="3_kf2mi"]
+[ext_resource type="Texture2D" uid="uid://bk1vq5riny3o1" path="res://Assets/mainmenu/botonHomeFocus.png" id="4_l41by"]
+[ext_resource type="Texture2D" uid="uid://cbd0s5y6hjy67" path="res://Assets/mainmenu/botonExit.png" id="5_27btx"]
+[ext_resource type="Texture2D" uid="uid://bsi3nyj5j7ygj" path="res://Assets/mainmenu/botonExitPressed.png" id="6_cflmu"]
+[ext_resource type="Texture2D" uid="uid://dm5fjk5hvgudj" path="res://Assets/mainmenu/botonExitFocus.png" id="7_gfxjg"]
+[ext_resource type="AudioStream" uid="uid://dt51bvrd67pmn" path="res://Assets/sounds/Lost Girl - finalVictoria.mp3" id="9_kf2mi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_arsox"]
+font = ExtResource("1_ey6n7")
+font_size = 12
+font_color = Color(1, 0.97433335, 0.78, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fof3l"]
+font = ExtResource("1_ey6n7")
+font_size = 15
+
+[node name="PantallaVictoria" type="Control" unique_id=243294336]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fof3l")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=654493570]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20392157, 0.16078432, 0.07450981, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=876438530]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Linea1" type="Label" parent="VBoxContainer" unique_id=226210852]
+layout_mode = 2
+text = "La Entidad ha sido reducida a polvo de estrellas..."
+label_settings = SubResource("LabelSettings_arsox")
+horizontal_alignment = 1
+
+[node name="Linea2" type="Label" parent="VBoxContainer" unique_id=1415191674]
+layout_mode = 2
+text = "
+El Uku Pacha, el Kay Pacha y el Hanan Pacha vuelven a respirar en armonía."
+label_settings = SubResource("LabelSettings_arsox")
+horizontal_alignment = 1
+
+[node name="Linea3" type="Label" parent="VBoxContainer" unique_id=833244158]
+layout_mode = 2
+text = "Gracias a ti, pequeña semilla, la Chakana vuelve a brillar
+y la Pachamama sonríe una vez más."
+label_settings = SubResource("LabelSettings_arsox")
+horizontal_alignment = 1
+
+[node name="Linea4" type="Label" parent="VBoxContainer" unique_id=1493036404]
+layout_mode = 2
+text = "Has restaurado el equilibrio del universo."
+label_settings = SubResource("LabelSettings_fof3l")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=526937641]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BtnHome" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=78567842]
+layout_mode = 2
+texture_normal = ExtResource("2_fof3l")
+texture_pressed = ExtResource("3_kf2mi")
+texture_focused = ExtResource("4_l41by")
+
+[node name="BtnSalir" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=738269169]
+layout_mode = 2
+texture_normal = ExtResource("5_27btx")
+texture_pressed = ExtResource("6_cflmu")
+texture_focused = ExtResource("7_gfxjg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=151672765]
+stream = ExtResource("9_kf2mi")
+volume_db = -20.0
+autoplay = true

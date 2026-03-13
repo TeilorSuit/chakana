@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://byo1f7u0mv85x"
+path="res://.godot/imported/30. Black Knife - LaEntidad.mp3-805cf5d59a094f98ad899f7a8a0c5ee3.mp3str"
+
+[deps]
+
+source_file="res://Assets/sounds/30. Black Knife - LaEntidad.mp3"
+dest_files=["res://.godot/imported/30. Black Knife - LaEntidad.mp3-805cf5d59a094f98ad899f7a8a0c5ee3.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,10 +3,11 @@
 if not Data.hablado_anciano_m1:
 	Anciano: Bienvenido, pequeño Sami... Te he estado esperando.
 	Sami: ¿Sami? ¿Quién es usted? ¿Dónde estoy?
-	Anciano: Estás en el Uku Pacha, el mundo de abajo... Un lugar de oscuridad, pero también donde residen las semillas de la vida.
-	Anciano: El equilibrio de nuestro universo ha sido quebrado por una sombra antigua. La Pachamama, en su último aliento de esperanza, te ha dado forma a ti.
+	Anciano: Estás en el [color=purple]Uku Pacha[/color], el mundo de abajo... Un lugar de oscuridad, pero también donde residen las semillas de la vida.
+	Anciano: Así como la [color=green]Serpiente[/color] se desliza por estas profundidades, tú debes aprender a moverte en las sombras.
+	Anciano: El equilibrio de nuestro universo ha sido quebrado por una sombra antigua. La [color=green]Pachamama[/color], en su último aliento de esperanza, te ha dado forma a ti.
 	Sami: ¿A mí? No sé de qué estás hablando...
-	Anciano: Eres la semilla que restaurará el orden. Pero no puedes hacerlo con las manos vacías. Debes reunir los fragmentos de la Chakana, el símbolo sagrado.
+	Anciano: Eres la semilla que restaurará el orden. Pero no puedes hacerlo con las manos vacías. Debes reunir los fragmentos de la [color=cyan]Chakana[/color], el símbolo sagrado.
 	Anciano: Encontrarás el primer fragmento oculto en las alturas de este mundo. Asciende, busca el símbolo del equilibrio y demuestra tu valía.
 	set Data.hablado_anciano_m1 = true
 	=> END
@@ -18,34 +19,33 @@ else:
 		Anciano: Has encontrado la balanza... Sabes lo que debes hacer. Busca las piedras y restaura su equilibrio.
 		=> END
 	else:
-		Anciano: Siento cómo la tierra bajo nuestros pies vuelve a respirar. Has restaurado el equilibrio del Uku Pacha, pequeño Sami.
-		Anciano: No te detengas ahora, sigue ascendiendo hacia la luz. El Kay Pacha te aguarda.
+		Anciano: Siento cómo la tierra bajo nuestros pies vuelve a respirar. Has restaurado el equilibrio del [color=purple]Uku Pacha[/color], pequeño Sami.
+		Anciano: No te detengas ahora, sigue ascendiendo hacia la luz. El [color=orange]Kay Pacha[/color] te aguarda.
 		=> END
-
-
 
 
 ~ inicio_nivel_2
 
 if not Data.hablado_anciano_m2:
-	Anciano: Has ascendido al Kay Pacha, el mundo terrenal...
+	Anciano: Has ascendido al [color=orange]Kay Pacha[/color], el mundo terrenal de los vivos...
 	Sami: Hay más luz aquí... pero las corrientes de agua están completamente quietas. Todo está en silencio.
-	Anciano: El cauce ha sido ahogado por La Entidad. Esa sombra antigua que sentiste en el subsuelo está secando las raíces de este mundo.
+	Anciano: El cauce ha sido ahogado por [color=red]La Entidad[/color]. Esa sombra antigua que sentiste en el subsuelo está secando las raíces de este mundo.
+	Anciano: Este reino debería estar vigilado por la fuerza del [color=orange]Puma[/color], pero hasta los guardianes han sido silenciados por la sequía.
 	Anciano: Necesito tu ayuda, pequeña semilla. Cruza ese portal; te llevará a una cueva profunda. 
-	Anciano: Allí dentro crece el Fruto de Yaku. Solo podrás alcanzarlo si logras devolverle el movimiento al agua. Tráemelo, es vital para restaurar el flujo aquí afuera.
+	Anciano: Allí dentro crece el [color=cyan]Fruto de Yaku[/color]. Solo podrás alcanzarlo si logras devolverle el movimiento al agua. Tráemelo, es vital para restaurar el flujo aquí afuera.
 	set Data.hablado_anciano_m2 = true
 	=> END
 else:
 	if not Data.tiene_fruto_yaku and not Data.entrego_fruto_m2:
-		Anciano: El portal te aguarda, Sami. Adéntrate en la cueva y tráeme el Fruto de Yaku.
+		Anciano: El portal te aguarda, Sami. Adéntrate en la cueva y tráeme el [color=cyan]Fruto de Yaku[/color].
 		=> END
 	elif Data.tiene_fruto_yaku and not Data.entrego_fruto_m2:
 		Sami: ¡El agua volvió a fluir dentro de la cueva! Aquí tienes el fruto que me pediste.
-		Anciano: Excelente... Siento cómo la vida retorna lentamente al Kay Pacha. Gracias, valiente Sami.
+		Anciano: Excelente... Siento cómo la vida retorna lentamente al [color=orange]Kay Pacha[/color]. Gracias, valiente Sami.
 		Anciano: Como muestra de mi gratitud, toma esto. Lo encontré tirado por ahí hace tiempo, seguro te será de más utilidad a ti.
 		do Data.dar_chakana_recompensa()
-		Sami: ¡Es otro fragmento de la Chakana!
-		Anciano: Así es. Úsalo para abrir la siguiente puerta. La Entidad se debilita con cada paso que das.
+		Sami: ¡Es otro fragmento de la [color=cyan]Chakana[/color]!
+		Anciano: Así es. Úsalo para abrir la siguiente puerta. [color=red]La Entidad[/color] se debilita con cada paso que das.
 		set Data.entrego_fruto_m2 = true
 		=> END
 	else:
@@ -53,15 +53,15 @@ else:
 		=> END
 
 
-
 ~ inicio_nivel_3
 
 if not Data.hablado_anciano_m3:
-	Anciano: Has llegado a lo más alto, Sami. Al Hanan Pacha, el mundo superior... el cielo.
+	Anciano: Has llegado a lo más alto, Sami. Al [color=yellow]Hanan Pacha[/color], el mundo superior... el cielo.
 	Sami: Se siente una energía muy pesada... Y no hay luz, el cielo está completamente vacío.
-	Anciano: La Entidad se esconde aquí. Para dejarnos en la oscuridad, ha movido al Sol y a la Luna de sus lugares.
-	Anciano: Solo te falta un fragmento de la Chakana. Para que aparezca, debes empujar las cajas del Sol y la Luna sobre sus respectivos botones.
-	Anciano: Resuelve este último enigma. Cuando el orden vuelva, la Chakana estará completa y podrás hacerle frente a la sombra.
+	Anciano: [color=red]La Entidad[/color] se esconde aquí. Para dejarnos en la oscuridad, ha movido al Sol y a la Luna de sus lugares.
+	Anciano: El gran [color=yellow]Cóndor[/color], guardián de estos cielos, no puede volar sin la luz de los astros.
+	Anciano: Solo te falta un fragmento de la [color=cyan]Chakana[/color]. Para que aparezca, debes empujar las cajas del Sol y la Luna sobre sus respectivos botones.
+	Anciano: Resuelve este último enigma. Cuando el orden vuelva, la [color=cyan]Chakana[/color] estará completa y podrás hacerle frente a la sombra.
 	set Data.hablado_anciano_m3 = true
 	=> END
 else:
@@ -69,12 +69,12 @@ else:
 		Anciano: El cielo sigue oscuro, Sami. Empuja las cajas del Sol y la Luna sobre sus botones para restaurar el orden.
 		=> END
 	elif Data.chakana_parts < 3:
-		Anciano: ¡La luz ha vuelto! Pero aún necesitas recoger el último fragmento de la Chakana. Búscalo, debe estar cerca.
+		Anciano: ¡La luz ha vuelto! Pero aún necesitas recoger el último fragmento de la [color=cyan]Chakana[/color]. Búscalo, debe estar cerca.
 		=> END
 	else:
 		Anciano: ¡El cielo vuelve a brillar! Has restaurado el equilibrio de los tres mundos, pequeña semilla.
-		Sami: ¡La Chakana... está brillando! Siento una fuerza increíble.
-		Anciano: Está completa. Ahora portas el poder de la Pachamama. La Entidad ya no es invencible a tus ataques.
+		Sami: ¡La [color=cyan]Chakana[/color]... está brillando! Siento una fuerza increíble.
+		Anciano: Está completa. Ahora portas el poder de la [color=green]Pachamama[/color]. [color=red]La Entidad[/color] ya no es invencible a tus ataques.
 		Anciano: Ve, valiente Sami. Cruza la última puerta y libera nuestro universo de esta sombra. ¡Confiamos en ti!
 		=> END
 		
@@ -92,3 +92,21 @@ Sami: Quizás alguien en este lugar pueda ayudarme.
 
 ~ portal_bloqueado
 Sami: Ese portal se ve peligroso. Mejor investigo un poco más antes de entrar.
+=> END
+
+~ inicio_jefe_final
+
+if not Data.jefe_visto:
+	Entidad: Vaya, vaya... así que la [wave amp=25 freq=5]pequeña semilla[/wave] finalmente ha llegado al [color=yellow]Hanan Pacha[/color].
+	Sami: ¡Tú eres [color=red]La Entidad[/color]! ¡Has quebrado el equilibrio de los tres mundos!
+	Entidad: ¿Equilibrio? Jajaja. El caos es mucho más pacífico. He silenciado el [color=purple]Uku Pacha[/color], secado el [color=orange]Kay Pacha[/color] y sumido este cielo en la oscuridad...
+	Entidad: Y pensar que la [color=green]Pachamama[/color] depositó sus últimas esperanzas en algo tan... frágil.
+	Sami: ¡Tengo la [color=cyan]Chakana[/color] completa! ¡Ya no te tengo miedo!
+	Entidad: Un [shake rate=20 level=10]juguete brillante[/shake] no te salvará, niño. ¡Prepárate para ser borrado!
+	set Data.jefe_visto = true
+	=> END
+else:
+	Entidad: ¿Aún sigues aquí, [wave amp=25 freq=5]pequeña molestia[/wave]?
+	Sami: ¡No me rendiré hasta restaurar el orden de nuestro universo!
+	Entidad: Qué persistente... ¡Acabemos con esto de una vez por todas!
+	=> END

@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwesum83slb87"]
+
+[ext_resource type="Script" uid="uid://dfpdijofa27u0" path="res://Scripts/bala_chakana.gd" id="1_5jfyi"]
+[ext_resource type="Texture2D" uid="uid://dwqu10ujuvwqn" path="res://Assets/variados/bullet-Sheet.png" id="1_kcwej"]
+[ext_resource type="PackedScene" uid="uid://bx2m5jq4v3357" path="res://Scenes/impacto_bala.tscn" id="2_red3w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jfyi"]
+atlas = ExtResource("1_kcwej")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_red3w"]
+atlas = ExtResource("1_kcwej")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljudl"]
+atlas = ExtResource("1_kcwej")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t64sd"]
+atlas = ExtResource("1_kcwej")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ru33t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jfyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_red3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljudl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t64sd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8afyi"]
+size = Vector2(18, 12)
+
+[node name="BalaChakana" type="Area2D"]
+collision_mask = 5
+script = ExtResource("1_5jfyi")
+impacto_scene = ExtResource("2_red3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ru33t")
+autoplay = "default"
+frame_progress = 0.30537498
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8afyi")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-10, -7, 13, 14)

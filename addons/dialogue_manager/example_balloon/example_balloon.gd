@@ -57,7 +57,7 @@ var mutation_cooldown: Timer = Timer.new()
 
 ## The base balloon anchor
 @onready var balloon: Control = %Balloon
-
+@onready var talk_sound: AudioStreamPlayer = %TalkSound # <-- AHORA ES ÚNICO CON %
 ## The label showing the name of the currently speaking character
 @onready var character_label: RichTextLabel = %CharacterLabel
 
@@ -81,6 +81,9 @@ func _ready() -> void:
 
 	mutation_cooldown.timeout.connect(_on_mutation_cooldown_timeout)
 	add_child(mutation_cooldown)
+	
+	# --- CONECTAMOS LA SEÑAL DEL TEXTO AQUÍ ---
+	dialogue_label.spoke.connect(_on_dialogue_label_spoke)
 
 	if auto_start:
 		if not is_instance_valid(dialogue_resource):
@@ -213,5 +216,25 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
+
+# --- NUEVA FUNCIÓN PARA LAS VOCES TIPO UNDERTALE ---
+# --- NUEVA FUNCIÓN PARA LAS VOCES TIPO UNDERTALE ---
+func _on_dialogue_label_spoke(letter: String, letter_index: int, speed: float) -> void:
+	if talk_sound == null: return # Escudo anti-crasheos
+
+	# Ignoramos espacios y signos de puntuación
+	if not letter in [" ", ".", ",", "!", "?", ":", "\n"]:
+		if dialogue_line.character == "Sami":
+			talk_sound.pitch_scale = 1.3 # Agudo
+		elif dialogue_line.character == "Anciano":
+			talk_sound.pitch_scale = 0.7 # Grave
+		elif dialogue_line.character == "La Entidad":
+			talk_sound.pitch_scale = 0.4 # Monstruoso
+		else:
+			return # Si habla el cartel u otro, no suena nada
+
+		# LA SOLUCIÓN SEGURA: Matamos el audio anterior (y su silencio) antes de reproducir el nuevo
+		talk_sound.stop()
+		talk_sound.play()
 
 #endregion

@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://c7b06vtu2qjf2"]
+
+[ext_resource type="Script" uid="uid://c0delr4va7i1g" path="res://Scripts/la_entidad.gd" id="1_d1oua"]
+[ext_resource type="Texture2D" uid="uid://ndbcln7xnh6d" path="res://Assets/la_entidad/la entidad-Burst.png" id="1_xa0fm"]
+[ext_resource type="Texture2D" uid="uid://du1icc422jjtu" path="res://Assets/la_entidad/la entidad-Down.png" id="2_d1oua"]
+[ext_resource type="Texture2D" uid="uid://beb6fmdi1c2ls" path="res://Assets/la_entidad/la entidad-Idle.png" id="3_y3008"]
+[ext_resource type="Texture2D" uid="uid://bsetg1chfcoip" path="res://Assets/la_entidad/la entidad-Sleep.png" id="4_nde42"]
+[ext_resource type="Texture2D" uid="uid://3d6i5rpf753d" path="res://Assets/la_entidad/la entidad-Spin.png" id="6_y3008"]
+[ext_resource type="AudioStream" uid="uid://byo1f7u0mv85x" path="res://Assets/sounds/30. Black Knife - LaEntidad.mp3" id="7_nde42"]
+[ext_resource type="AudioStream" uid="uid://cqpic7q4lafs5" path="res://Assets/sounds/laentidad/caida-impactosuelo.mp3" id="8_5wvjr"]
+[ext_resource type="AudioStream" uid="uid://dvspaeh6hqmah" path="res://Assets/sounds/laentidad/cinematic goun-explosion.mp3" id="9_7yuc5"]
+[ext_resource type="AudioStream" uid="uid://c65f08m34w46a" path="res://Assets/sounds/laentidad/spinning.wav" id="10_numqq"]
+[ext_resource type="AudioStream" uid="uid://1rv1okd28lfo" path="res://Assets/sounds/laentidad/stone break.wav" id="11_lbq36"]
+[ext_resource type="AudioStream" uid="uid://d3h2ghx6fuh2f" path="res://Assets/sounds/laentidad/whoosh.wav" id="12_0pmii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_455hk"]
+atlas = ExtResource("1_xa0fm")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qe4c"]
+atlas = ExtResource("1_xa0fm")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf2hp"]
+atlas = ExtResource("1_xa0fm")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1alju"]
+atlas = ExtResource("1_xa0fm")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdvwv"]
+atlas = ExtResource("3_y3008")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w46me"]
+atlas = ExtResource("3_y3008")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u0fh"]
+atlas = ExtResource("3_y3008")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jf1r"]
+atlas = ExtResource("3_y3008")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v8i3"]
+atlas = ExtResource("4_nde42")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsss4"]
+atlas = ExtResource("4_nde42")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nde42"]
+atlas = ExtResource("6_y3008")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys7bk"]
+atlas = ExtResource("6_y3008")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x24g4"]
+atlas = ExtResource("6_y3008")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ys7bk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_455hk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qe4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf2hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1alju")
+}],
+"loop": true,
+"name": &"burst",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d1oua")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdvwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w46me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u0fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jf1r")
+}],
+"loop": true,
+"name": &"iddle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5v8i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsss4")
+}],
+"loop": true,
+"name": &"sleep",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nde42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys7bk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x24g4")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y3008"]
+size = Vector2(86, 75)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3008"]
+radius = 27.0
+height = 54.0
+
+[node name="LaEntidad" type="CharacterBody2D" unique_id=2022624495 node_paths=PackedStringArray("musica_jefe")]
+collision_layer = 4
+script = ExtResource("1_d1oua")
+musica_jefe = NodePath("AudioStreamPlayer")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=942813725]
+sprite_frames = SubResource("SpriteFrames_ys7bk")
+animation = &"iddle"
+autoplay = "iddle"
+frame_progress = 0.71661454
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292476885]
+position = Vector2(0, -13.5)
+shape = SubResource("RectangleShape2D_y3008")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=583185548]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=575496054]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_y3008")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1738713783]
+stream = ExtResource("7_nde42")
+volume_db = -25.0
+
+[node name="SfxCaida" type="AudioStreamPlayer" parent="." unique_id=716148360]
+stream = ExtResource("8_5wvjr")
+volume_db = -5.0
+
+[node name="SfxMuerte" type="AudioStreamPlayer" parent="." unique_id=776282131]
+stream = ExtResource("9_7yuc5")
+volume_db = -5.0
+
+[node name="SfxSpin" type="AudioStreamPlayer" parent="." unique_id=883171871]
+stream = ExtResource("10_numqq")
+volume_db = -5.0
+
+[node name="SfxDano" type="AudioStreamPlayer" parent="." unique_id=1215874445]
+stream = ExtResource("11_lbq36")
+volume_db = -5.0
+
+[node name="SfxMeteorito" type="AudioStreamPlayer" parent="." unique_id=1206966283]
+stream = ExtResource("12_0pmii")
+volume_db = -5.0
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
