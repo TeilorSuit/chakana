@@ -1,17 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://nwv7hqpihs3n"]
+[gd_scene format=3 uid="uid://nwv7hqpihs3n"]
 
 [ext_resource type="Script" uid="uid://c0hogh8s506mk" path="res://Scripts/cartel_balanza.gd" id="1_8qkix"]
+[ext_resource type="Texture2D" uid="uid://cv5ykdxownevk" path="res://Assets/npcs/enter-Sheet.png" id="2_i8vye"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ugh8h"]
 size = Vector2(40, 32)
 
-[node name="CartelBalanza" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8riji"]
+atlas = ExtResource("2_i8vye")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeb0j"]
+atlas = ExtResource("2_i8vye")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wur1e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8riji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeb0j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CartelBalanza" type="Node2D" unique_id=1633794393]
 script = ExtResource("1_8qkix")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2105592005]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=47100858]
 shape = SubResource("RectangleShape2D_ugh8h")
+
+[node name="Indicador" type="AnimatedSprite2D" parent="." unique_id=297421880]
+visible = false
+position = Vector2(-1, -26)
+sprite_frames = SubResource("SpriteFrames_wur1e")
+autoplay = "default"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

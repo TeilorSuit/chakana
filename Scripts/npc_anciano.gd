@@ -18,7 +18,6 @@ func _ready() -> void:
 		nodo_chakana.set_deferred("monitoring", false)
 
 func _process(_delta: float) -> void:
-	# Si Sami está cerca, apretamos el botón (ej. "ui_accept" que suele ser Enter/Espacio), y NO hay un diálogo activo
 	if jugador_cerca and Input.is_action_just_pressed("ui_accept") and not Data.en_dialogo:
 		iniciar_dialogo()
 
@@ -35,21 +34,28 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player": 
 		jugador_cerca = true
 		Data.cerca_de_npc = true 
+		if not Data.en_dialogo:
+			$Indicador.visible = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		jugador_cerca = false
 		Data.cerca_de_npc = false 
+		$Indicador.visible = false
 		
 # --- SEÑALES DEL DIALOGUE MANAGER ---
 func _on_dialogue_started(_resource: DialogueResource):
 	Data.en_dialogo = true
-
+	if $Indicador:
+		$Indicador.visible = false
+		
 func _on_dialogue_ended(_resource: DialogueResource):
-	# margen para que no se vuelva a activar si dejas apretado el botón
+	# margen de activación
 	await get_tree().create_timer(0.1).timeout
 	Data.en_dialogo = false
-	
+	if jugador_cerca and $Indicador:
+		$Indicador.visible = true
+		
 # --- FUNCIÓN PARA SPAWNEAR LA CHAKANA ---
 func _on_aparecer_chakana():
 	if numero_mundo == 2 and nodo_chakana:

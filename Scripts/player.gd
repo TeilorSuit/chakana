@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var pasos_sound: AudioStreamPlayer2D = $PasosSound
 
 const SPEED = 125.0
-var jump_velocity = -400.0 # 
+var jump_velocity = -400.0 
 var en_game_over = false
 
 var vidas_jefe = 3
@@ -46,7 +46,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not Data.cerca_de_npc:
+	# --- AQUÍ ESTÁ LA CORRECCIÓN: Quitamos el 'not Data.cerca_de_npc' ---
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity 
 		jump_sound.play()
 	
@@ -77,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	# Empujar cajas (tu código intacto)
+	# Empujar cajas
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var box = collision.get_collider()
@@ -92,21 +93,19 @@ func _physics_process(delta: float) -> void:
 				box.linear_velocity = push_velocity
 
 func disparar():
-	# Si no puede disparar o no hay escena, no hace nada
 	if Data.en_dialogo or Data.en_pregunta: return
 	
 	if not can_shoot or not bala_scene: return
 	
-	can_shoot = false # Bloquea el disparo temporalmente
+	can_shoot = false 
 	disparo_sound.play()
-	# Efecto de Destello (Muzzle Flash): Sami brilla en amarillo brillante un instante
-	sprite_2d.modulate = Color(2, 2, 0) # Amarillo sobre-iluminado
+	
+	sprite_2d.modulate = Color(2, 2, 0) 
 	get_tree().create_timer(0.05).timeout.connect(func(): sprite_2d.modulate = Color(1, 1, 1))
 
 	var nueva_bala = bala_scene.instantiate()
 	if facing_right:
 		nueva_bala.direction = 1
-		# Ajusta ese Vector2(15, 0) dependiendo de dónde quieras que salga la bala
 		nueva_bala.position = global_position + Vector2(15, 0) 
 	else:
 		nueva_bala.direction = -1
@@ -116,7 +115,6 @@ func disparar():
 			
 	get_parent().add_child(nueva_bala) 
 	
-	# Inicia el cooldown para volver a disparar
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
@@ -124,15 +122,13 @@ func recibir_dano_jefe():
 	if is_invulnerable:
 		return
 		
-	vidas_jefe -= 1 # LA VIDA BAJA AQUÍ
+	vidas_jefe -= 1 
 	hit_sound.play()
 	print("Sami recibió daño. Vidas restantes: ", vidas_jefe)
 	
-	# --- ACTUALIZAMOS LOS CORAZONES AQUÍ ---
 	var ui = get_tree().current_scene.get_node_or_null("%UIJefe")
 	if ui:
 		ui.actualizar_corazones(vidas_jefe)
-	# ---------------------------------------
 	
 	if vidas_jefe <= 0:
 		morir_animacion(true)
@@ -158,7 +154,6 @@ func recibir_dano_meteorito():
 	hit_sound.play()
 	print("Sami recibió daño por meteorito. Vidas restantes: ", vidas_jefe)
 	
-	# Actualizamos la UI
 	var ui = get_tree().current_scene.get_node_or_null("%UIJefe")
 	if ui:
 		ui.actualizar_corazones(vidas_jefe)
@@ -183,37 +178,30 @@ func morir():
 	print("Game Over en el Jefe. Reapareciendo y reseteando arena...")
 	vidas_jefe = 3 
 	
-	# 1. LIMPIEZA DE ESTADOS FANTASMA (Crucial por si mueres en medio de un ataque)
 	Data.en_pregunta = false 
 	Data.en_dialogo = false
 	
-	# 2. Reseteamos los corazones a 3
 	var ui = get_tree().current_scene.get_node_or_null("%UIJefe")
 	if ui:
 		ui.actualizar_corazones(vidas_jefe)
 	
 	activar_super_salto(false)
 	
-	# 3. Teletransporte al respawn
 	var punto_respawn = get_tree().current_scene.get_node_or_null("%PuntoRespawnJefe")
 	if punto_respawn:
 		global_position = punto_respawn.global_position
 		
-	# 4. Abrimos el muro
 	var muro_izq = get_tree().current_scene.get_node_or_null("%MuroIzq/CollisionShape2D")
 	if muro_izq:
 		muro_izq.set_deferred("disabled", true)
 		
-	# 5. Reseteamos el Trigger con un SEGURO DE TIEMPO
 	var trigger = get_tree().current_scene.get_node_or_null("%TriggerJefe")
 	if trigger:
 		trigger.dialogo_iniciado = false
-		# Esperamos medio segundo antes de reactivar el trigger para evitar que se dispare solo al respawnear
 		get_tree().create_timer(0.5).timeout.connect(func(): trigger.set_deferred("monitoring", true))
 		
 	Engine.time_scale = 1.0 
 	
-	# 6. Avisamos al Jefe que se resetee
 	var jefe = get_tree().get_first_node_in_group("Jefe")
 	if jefe and jefe.has_method("resetear_batalla"):
 		jefe.resetear_batalla()
@@ -235,23 +223,20 @@ func sacudir_camara(fuerza: float, duracion: float):
 	var pasos = int(duracion / 0.05)
 	
 	for i in range(pasos):
-		# Genera un movimiento aleatorio solo en el eje Y (arriba y abajo)
 		var y_random = randf_range(-fuerza, fuerza)
 		tween.tween_property(camara, "offset", Vector2(0, y_random), 0.05)
 		
-	# ¡SEGURO DE VIDA! Regresar la cámara al centro exacto siempre
 	tween.tween_property(camara, "offset", Vector2.ZERO, 0.05)
 
 func morir_animacion(es_jefe: bool = false):
-	if en_game_over: return # Evita que se ejecute dos veces si tocas dos pinchos
+	if en_game_over: return 
 	en_game_over = true
 	
-	# Detenemos a Sami en seco para que no siga cayendo o moviéndose
 	velocity = Vector2.ZERO
 	set_physics_process(false) 
 	
 	var canvas_muerte = CanvasLayer.new()
-	canvas_muerte.layer = 200 # Por encima de TODO
+	canvas_muerte.layer = 200 
 	get_tree().current_scene.add_child(canvas_muerte)
 	
 	var fondo_negro = ColorRect.new()
@@ -259,7 +244,6 @@ func morir_animacion(es_jefe: bool = false):
 	fondo_negro.size = get_viewport_rect().size
 	canvas_muerte.add_child(fondo_negro)
 	
-	# --- LOS 5 MENSAJES MOTIVADORES ---
 	var mensajes = [
 		"Levántate, pequeña semilla...",
 		"La Pachamama aún confía en ti.",
@@ -280,30 +264,24 @@ func morir_animacion(es_jefe: bool = false):
 	var fuente_pixel = preload("res://Assets/m5x7.ttf")
 	var ajustes = LabelSettings.new()
 	ajustes.font = fuente_pixel
-	ajustes.font_size = 16 # Letra sutil
+	ajustes.font_size = 16 
 	ajustes.font_color = Color.WHITE
 	texto_muerte.label_settings = ajustes
 	fondo_negro.add_child(texto_muerte)
 	
 	var tween = create_tween()
-	# 1. Fundido a negro rápido (0.5 seg)
 	tween.tween_property(fondo_negro, "color:a", 1.0, 0.5)
-	
-	# 2. Aparece el mensaje suavemente (1 seg)
 	tween.tween_property(texto_muerte, "modulate:a", 1.0, 1.0)
-	
-	# 3. Te deja leer el mensaje 2 segunditos
 	tween.tween_interval(2.0)
 	
-	# 4. Reinicia la escena o teletransporta al jefe
 	if es_jefe:
 		tween.tween_callback(func():
-			morir() # Teletransportamos y reseteamos al jefe en la oscuridad
+			morir() 
 		)
 		tween.tween_property(fondo_negro, "modulate:a", 0.0, 0.5)
 		tween.tween_property(texto_muerte, "modulate:a", 0.0, 0.5)
 		tween.tween_callback(func():
-			set_physics_process(true) # Le devolvemos el movimiento a Sami
+			set_physics_process(true) 
 			en_game_over = false
 			canvas_muerte.queue_free()
 		)

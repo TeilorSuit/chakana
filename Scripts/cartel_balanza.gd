@@ -19,14 +19,21 @@ func _process(_delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		jugador_cerca = true
+		if not Data.en_dialogo:
+			$Indicador.visible = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		jugador_cerca = false
+		$Indicador.visible = false
 
 func _on_dialogue_started(_resource: DialogueResource):
 	Data.en_dialogo = true
+	if $Indicador:
+		$Indicador.visible = false 
 
 func _on_dialogue_ended(_resource: DialogueResource):
 	await get_tree().create_timer(0.1).timeout
 	Data.en_dialogo = false
+	if jugador_cerca and $Indicador:
+		$Indicador.visible = true
