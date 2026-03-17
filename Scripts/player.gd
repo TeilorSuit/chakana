@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var hit_sound: AudioStreamPlayer2D = $HitSound
 @onready var pasos_sound: AudioStreamPlayer2D = $PasosSound
 
+const CINEMATICA_MUERTE = preload("res://Scenes/cinematica_muerte.tscn")
+
 const SPEED = 125.0
 var jump_velocity = -400.0 
 var en_game_over = false
@@ -21,18 +23,18 @@ var fire_rate = 0.25
 
 func _ready():
 	add_to_group("Player")
-	# Verificamos en qué nivel estamos para cargar el paso correcto
+	Data.en_dialogo = false
+	Data.en_pregunta = false
 	var nombre_escena = get_tree().current_scene.name.to_lower()
 	
 	if "level1" in nombre_escena:
-		pasos_sound.stream = load("res://Assets/sounds/pasos lvl1.wav") # Cambia a .mp3 si los convertiste
+		pasos_sound.stream = load("res://Assets/sounds/pasos lvl1.wav") 
 	elif "level2" in nombre_escena:
 		pasos_sound.stream = load("res://Assets/sounds/pasos lvl2.wav")
 	elif "level3" in nombre_escena:
 		pasos_sound.stream = load("res://Assets/sounds/pasos lvl3.wav")
 
 func _physics_process(delta: float) -> void:
-	# VALIDACIÓN MAESTRA: Si hay diálogo o pregunta, Sami se congela
 	if Data.en_dialogo or Data.en_pregunta:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		sprite_2d.animation = "idle"
@@ -46,7 +48,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	# --- AQUÍ ESTÁ LA CORRECCIÓN: Quitamos el 'not Data.cerca_de_npc' ---
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity 
 		jump_sound.play()
@@ -67,14 +68,14 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		sprite_2d.animation = "jump"
-		pasos_sound.stop() # Si está en el aire, no hay sonido de pasos
+		pasos_sound.stop() 
 	elif direction:
 		sprite_2d.animation = "walk"
 		if not pasos_sound.playing:
-			pasos_sound.play() # Reproduce los pasos si está caminando
+			pasos_sound.play() 
 	else:
 		sprite_2d.animation = "idle"
-		pasos_sound.stop() # Si se queda quieto, apaga los pasos
+		pasos_sound.stop() 
 	
 	move_and_slide()
 	
@@ -208,6 +209,10 @@ func morir():
 		
 	if has_node("Camera2D"):
 		get_node("Camera2D").make_current()
+		
+	# AÑADE ESTO AL FINAL:
+	set_physics_process(true)
+	en_game_over = false
 
 func activar_super_salto(activado: bool):
 	if activado:
@@ -235,57 +240,11 @@ func morir_animacion(es_jefe: bool = false):
 	velocity = Vector2.ZERO
 	set_physics_process(false) 
 	
-	var canvas_muerte = CanvasLayer.new()
-	canvas_muerte.layer = 200 
-	get_tree().current_scene.add_child(canvas_muerte)
+	var escena_muerte = CINEMATICA_MUERTE.instantiate()
+	escena_muerte.es_jefe = es_jefe
+	escena_muerte.player_ref = self
 	
-	var fondo_negro = ColorRect.new()
-	fondo_negro.color = Color(0, 0, 0, 0)
-	fondo_negro.size = get_viewport_rect().size
-	canvas_muerte.add_child(fondo_negro)
-	
-	var mensajes = [
-		"Levántate, pequeña semilla...",
-		"La Pachamama aún confía en ti.",
-		"El equilibrio requiere paciencia.",
-		"No temas a la oscuridad, Sami.",
-		"Cada caída te hace más fuerte."
-	]
-	var mensaje_elegido = mensajes[randi() % mensajes.size()]
-	
-	var texto_muerte = Label.new()
-	texto_muerte.text = mensaje_elegido
-	texto_muerte.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	texto_muerte.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	texto_muerte.size = get_viewport_rect().size
-	texto_muerte.position = Vector2.ZERO
-	texto_muerte.modulate.a = 0.0
-	
-	var fuente_pixel = preload("res://Assets/m5x7.ttf")
-	var ajustes = LabelSettings.new()
-	ajustes.font = fuente_pixel
-	ajustes.font_size = 16 
-	ajustes.font_color = Color.WHITE
-	texto_muerte.label_settings = ajustes
-	fondo_negro.add_child(texto_muerte)
-	
-	var tween = create_tween()
-	tween.tween_property(fondo_negro, "color:a", 1.0, 0.5)
-	tween.tween_property(texto_muerte, "modulate:a", 1.0, 1.0)
-	tween.tween_interval(2.0)
-	
-	if es_jefe:
-		tween.tween_callback(func():
-			morir() 
-		)
-		tween.tween_property(fondo_negro, "modulate:a", 0.0, 0.5)
-		tween.tween_property(texto_muerte, "modulate:a", 0.0, 0.5)
-		tween.tween_callback(func():
-			set_physics_process(true) 
-			en_game_over = false
-			canvas_muerte.queue_free()
-		)
-	else:
-		tween.tween_callback(func():
-			get_tree().reload_current_scene()
-		)
+	if escena_muerte is CanvasLayer:
+		escena_muerte.layer = 200 
+		
+	get_tree().current_scene.add_child(escena_muerte)

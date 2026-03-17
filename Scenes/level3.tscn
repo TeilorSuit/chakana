@@ -19,8 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://cf432o63kwayt" path="res://Scenes/placaRoja.tscn" id="16_s5d5r"]
 [ext_resource type="PackedScene" uid="uid://cq7qm4bu0vy4v" path="res://Scenes/palanca_horizontal.tscn" id="17_06tg8"]
 [ext_resource type="PackedScene" uid="uid://ccy6p6ob0wf38" path="res://Scenes/altar.tscn" id="18_fgdcu"]
+[ext_resource type="Texture2D" uid="uid://2da8yyd3iit" path="res://Assets/variados/lunaPared.png" id="19_5v8i3"]
 [ext_resource type="PackedScene" uid="uid://cis3diamjl2x3" path="res://Scenes/chakana_part.tscn" id="19_ueeha"]
 [ext_resource type="Texture2D" uid="uid://cysx3q0be31nm" path="res://Assets/chakana parts/chakana p3.png" id="20_8dwqx"]
+[ext_resource type="Texture2D" uid="uid://bxumkjx42hpph" path="res://Assets/variados/solPared.png" id="20_tsss4"]
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="21_tsss4"]
 [ext_resource type="PackedScene" uid="uid://dff8ham64vyag" path="res://Scenes/npcoldperson.tscn" id="22_eqm1k"]
 [ext_resource type="Script" uid="uid://br7oesrvqvpj5" path="res://Scripts/trigger_jefe.gd" id="23_455hk"]
 [ext_resource type="Resource" uid="uid://c8jkwta1yxxtu" path="res://dialogos/anciano_dialogos.dialogue" id="23_d08tm"]
@@ -31,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cb0h0ov1rtgqc" path="res://Scenes/ui_jefe.tscn" id="27_w46me"]
 [ext_resource type="PackedScene" uid="uid://cqlgmc5y2wh6j" path="res://Scenes/menu_pausa.tscn" id="30_5qe4c"]
 [ext_resource type="AudioStream" uid="uid://bk8kn730x6pi5" path="res://Assets/sounds/Glowing Snow - lvl3.mp3" id="31_mf2hp"]
+[ext_resource type="PackedScene" uid="uid://dff8oms334jhq" path="res://Scenes/transicion_nivel.tscn" id="35_s5d5r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g5cw1"]
 texture = ExtResource("1_tc3ri")
@@ -143,6 +147,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_s5d5r"]
+font = ExtResource("21_tsss4")
+font_size = 8
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_455hk"]
 size = Vector2(445, 128)
 
@@ -161,7 +169,7 @@ tile_map_data = PackedByteArray("AAACACcAAAADAAIAAAACACYAAAADAAIAAAACACUAAAADAAI
 tile_set = SubResource("TileSet_76ybr")
 
 [node name="Player" parent="." unique_id=1932682699 instance=ExtResource("2_3nkac")]
-position = Vector2(167, 520)
+position = Vector2(178, 521)
 bala_scene = ExtResource("3_pdvwv")
 
 [node name="killzone" parent="." unique_id=1914982741 instance=ExtResource("3_eqm1k")]
@@ -267,6 +275,22 @@ grupo_requerido = "luna"
 position = Vector2(1333, 289.00003)
 rotation = -3.1402469
 
+[node name="LunaPared" type="Sprite2D" parent="Puzzle" unique_id=610899456]
+position = Vector2(1510, 381)
+texture = ExtResource("19_5v8i3")
+
+[node name="SolPared" type="Sprite2D" parent="Puzzle" unique_id=1717212666]
+position = Vector2(1071, 385)
+texture = ExtResource("20_tsss4")
+
+[node name="Reiniciar" type="Label" parent="Puzzle" unique_id=1177515180]
+offset_left = 1338.0
+offset_top = 281.0
+offset_right = 1381.0
+offset_bottom = 304.0
+text = "Reiniciar cajas"
+label_settings = SubResource("LabelSettings_s5d5r")
+
 [node name="altar" parent="." unique_id=1602442834 instance=ExtResource("18_fgdcu")]
 position = Vector2(1793, 345)
 
@@ -348,6 +372,10 @@ unique_name_in_owner = true
 stream = ExtResource("31_mf2hp")
 volume_db = -20.0
 autoplay = true
+
+[node name="TransicionNivel" parent="." unique_id=1295748132 instance=ExtResource("35_s5d5r")]
+numero_nivel = "NIVEL 3"
+nombre_nivel = "Hanan Pacha"
 
 [connection signal="body_entered" from="Puzzle/PlacaSol" to="Puzzle/PlacaSol" method="_on_body_entered"]
 [connection signal="estado_cambiado" from="Puzzle/PlacaSol" to="Puzzle" method="_on_placa_sol_estado_cambiado"]

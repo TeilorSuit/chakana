@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhs1864b6e2c4"
+path="res://.godot/imported/sfx door piedra.mp3-aaf1880f2248ab58f8aa7b6d3b06a57c.mp3str"
+
+[deps]
+
+source_file="res://Assets/sounds/sfx door piedra.mp3"
+dest_files=["res://.godot/imported/sfx door piedra.mp3-aaf1880f2248ab58f8aa7b6d3b06a57c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

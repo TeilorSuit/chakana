@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://djtme3vecsutd"]
+
+[ext_resource type="Script" uid="uid://bq5rbywqg66qm" path="res://Scenes/cinematica_muerte.gd" id="1_m8pg6"]
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="2_m7413"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m8pg6"]
+font = ExtResource("2_m7413")
+
+[sub_resource type="LabelSettings" id="LabelSettings_fgtvb"]
+font = ExtResource("2_m7413")
+font_size = 12
+font_color = Color(0.72, 0.72, 0.72, 1)
+
+[node name="CinematicaMuerte" type="CanvasLayer" unique_id=244734662]
+layer = 150
+script = ExtResource("1_m8pg6")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=147824728]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=369708555]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -76.5
+offset_right = 144.5
+offset_bottom = 76.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Muerte" type="Label" parent="ColorRect/VBoxContainer" unique_id=150829072]
+layout_mode = 2
+text = "Game Over
+"
+label_settings = SubResource("LabelSettings_m8pg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Frase" type="Label" parent="ColorRect/VBoxContainer" unique_id=1051688874]
+layout_mode = 2
+text = "x_x"
+label_settings = SubResource("LabelSettings_m8pg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="ColorRect/VBoxContainer" unique_id=1328120420]
+layout_mode = 2
+
+[node name="Continuar" type="Label" parent="ColorRect/VBoxContainer" unique_id=1765021736]
+layout_mode = 2
+text = "- Presiona ENTER o ESPACIO para continuar -"
+label_settings = SubResource("LabelSettings_fgtvb")
+horizontal_alignment = 1
+vertical_alignment = 1

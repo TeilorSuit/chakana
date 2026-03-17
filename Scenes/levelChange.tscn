@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm5vq1ihqyunr"]
+[gd_scene format=3 uid="uid://cm5vq1ihqyunr"]
 
 [ext_resource type="Script" uid="uid://c55nccxtj5rwl" path="res://Scripts/level1to2Change.gd" id="1_lgd3h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yymuf"]
 size = Vector2(63, 20)
 
-[node name="levelChange" type="Area2D"]
+[node name="levelChange" type="Area2D" unique_id=288173599]
 script = ExtResource("1_lgd3h")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2066917128]
 position = Vector2(-7.5, 0)
 shape = SubResource("RectangleShape2D_yymuf")
 

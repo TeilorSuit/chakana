@@ -104,7 +104,7 @@ volume_db = -25.0
 
 [node name="DisparoSound" type="AudioStreamPlayer2D" parent="." unique_id=771379405]
 stream = ExtResource("6_nn08x")
-volume_db = -10.0
+volume_db = -5.412
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=61448174]
 stream = ExtResource("7_52ee3")

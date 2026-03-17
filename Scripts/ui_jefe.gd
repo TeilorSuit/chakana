@@ -6,7 +6,6 @@ extends CanvasLayer
 @onready var barra_vida_jefe = $BarraVidaJefe
 @onready var nombre_jefe = $NombreJefe
 
-# ¡ASEGÚRATE DE QUE LA RUTA COINCIDA CON TU NUEVA ESTRUCTURA!
 @onready var texto_pregunta = $CajaPregunta/TextoPregunta
 @onready var tiempo_label = $CajaPregunta/TiempoLabel
 @onready var opciones_labels = [
@@ -38,7 +37,7 @@ var banco_preguntas = [
 var preguntas_mezcladas = []
 var pregunta_actual = {}
 var seleccion_actual = 0
-var tiempo_restante = 10.0
+var tiempo_restante = 20.0
 
 func _ready():
 	visible = true 
@@ -62,7 +61,6 @@ func iniciar_batalla_ui(vida_maxima: int):
 	actualizar_corazones(3)
 	
 func actualizar_vida_jefe(vida_actual: int):
-	# Creamos un Tween para que la barra baje suavemente y no de golpe
 	var tween = create_tween()
 	tween.tween_property(barra_vida_jefe, "value", vida_actual, 0.2)
 	
@@ -81,7 +79,7 @@ func mostrar_pregunta():
 	
 	texto_pregunta.text = pregunta_actual["pregunta"]
 	seleccion_actual = 0
-	tiempo_restante = 10.0
+	tiempo_restante = 20.0
 	actualizar_cursor()
 	
 	filtro_sepia.visible = true
@@ -101,7 +99,6 @@ func _process(delta):
 	if not Data.en_pregunta: 
 		return
 		
-	# TRUCO MATEMÁTICO: Desvinculamos el delta de la cámara lenta para que sea 1 segundo real
 	var delta_real = delta
 	if Engine.time_scale > 0.0:
 		delta_real = delta / Engine.time_scale
@@ -113,12 +110,11 @@ func _process(delta):
 		verificar_respuesta(true) 
 		return
 		
-	# Control preciso con tu InputMap
-	if Input.is_action_just_pressed("jump"): # Tecla W o Flecha Arriba
+	if Input.is_action_just_pressed("jump"): 
 		seleccion_actual -= 1
 		if seleccion_actual < 0: seleccion_actual = 3
 		actualizar_cursor()
-	elif Input.is_action_just_pressed("abajo"): # La tecla S que creamos
+	elif Input.is_action_just_pressed("abajo"): 
 		seleccion_actual += 1
 		if seleccion_actual > 3: seleccion_actual = 0
 		actualizar_cursor()
@@ -126,12 +122,11 @@ func _process(delta):
 		verificar_respuesta(false)
 
 func verificar_respuesta(tiempo_agotado: bool):
-	Data.en_pregunta = false # Dejamos de leer el teclado
+	Data.en_pregunta = false 
 	
 	if tiempo_agotado:
 		for op in opciones_labels:
-			op.modulate = Color(1, 0, 0) # Todo en Rojo
-		# Esperamos medio segundo ignorando la cámara lenta (el 4to parámetro 'true' hace la magia)
+			op.modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.5, true, false, true).timeout
 		
 		# Revelamos la correcta
@@ -139,29 +134,23 @@ func verificar_respuesta(tiempo_agotado: bool):
 		await get_tree().create_timer(1.0, true, false, true).timeout
 		
 	elif seleccion_actual == pregunta_actual["correcta"]:
-		opciones_labels[seleccion_actual].modulate = Color(0, 1, 0) # Verde directo
-		# Solo esperamos 1 seg. El 'true' al final ignora el 0.05 del jefe.
+		opciones_labels[seleccion_actual].modulate = Color(0, 1, 0)
 		await get_tree().create_timer(1.0, true, false, true).timeout 
 		
 	else:
-		# 1. Pinta de rojo la que elegiste mal
 		opciones_labels[seleccion_actual].modulate = Color(1, 0, 0) 
 		
-		# 2. Pausa dramática de medio segundo para que asimiles el error
 		await get_tree().create_timer(0.5, true, false, true).timeout 
 		
-		# 3. Feedback visual: La correcta parpadea en verde para llamar tu atención
 		for i in range(3):
-			opciones_labels[pregunta_actual["correcta"]].modulate = Color(0, 1, 0) # Verde
+			opciones_labels[pregunta_actual["correcta"]].modulate = Color(0, 1, 0)
 			await get_tree().create_timer(0.15, true, false, true).timeout 
-			opciones_labels[pregunta_actual["correcta"]].modulate = Color(1, 1, 1) # Blanco
+			opciones_labels[pregunta_actual["correcta"]].modulate = Color(1, 1, 1)
 			await get_tree().create_timer(0.15, true, false, true).timeout 
 			
-		# Se queda verde al final por medio segundo más
 		opciones_labels[pregunta_actual["correcta"]].modulate = Color(0, 1, 0) 
 		await get_tree().create_timer(0.5, true, false, true).timeout 
 
-	# 4. Limpiar UI y avisar al Jefe
 	filtro_sepia.visible = false
 	caja_pregunta.visible = false
 	

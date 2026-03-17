@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://creo8qs0u2qbk"]
+
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="1_lpe7s"]
+[ext_resource type="Script" uid="uid://dy3gylqa6rm6r" path="res://Scripts/creditos.gd" id="1_yyntd"]
+[ext_resource type="Texture2D" uid="uid://ce3qrekp3vp7g" path="res://Assets/mainmenu/botonHome.png" id="2_yyntd"]
+[ext_resource type="Texture2D" uid="uid://c8ber86w8hb47" path="res://Assets/mainmenu/botonHomePressed.png" id="3_qi66g"]
+[ext_resource type="Texture2D" uid="uid://bk1vq5riny3o1" path="res://Assets/mainmenu/botonHomeFocus.png" id="4_arkb1"]
+
+[sub_resource type="Theme" id="Theme_x1sk8"]
+default_font = ExtResource("1_lpe7s")
+
+[node name="Creditos" type="Control" unique_id=1054358520]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yyntd")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=631868150]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20392157, 0.16078432, 0.07450981, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1835413840]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -38.5
+offset_right = 109.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_x1sk8")
+bbcode_enabled = true
+text = "[center]
+[b]CHAKANA[/b]
+
+[color=yellow]Desarrollador:[/color]
+Marlon Loor Medranda
+
+[color=yellow]Carrera:[/color]
+Ingeniería de Software (4to Nivel)
+
+[color=yellow]Facultad:[/color]
+Facultad de Ciencias de la Computación
+
+[color=yellow]Universidad:[/color]
+Universidad Técnica Estatal de Quevedo (UTEQ)
+
+[color=yellow]Materia:[/color]
+Interacción Hombre-Máquina
+[/center]"
+
+[node name="BtnHome" type="TextureButton" parent="." unique_id=519704802]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -51.0
+offset_right = 16.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("2_yyntd")
+texture_pressed = ExtResource("3_qi66g")
+texture_focused = ExtResource("4_arkb1")
+
+[connection signal="pressed" from="BtnHome" to="." method="_on_btn_volver_pressed"]

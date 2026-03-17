@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1erjc2gghqk1"]
+[gd_scene format=3 uid="uid://b1erjc2gghqk1"]
 
 [ext_resource type="Script" uid="uid://kk4twnc8gxx0" path="res://Scripts/menu_principal.gd" id="1_5mndp"]
 [ext_resource type="Texture2D" uid="uid://cd4hb8mvg7rkw" path="res://Assets/mainmenu/Chakana.png" id="1_ul5lg"]
@@ -12,13 +12,19 @@
 [ext_resource type="Texture2D" uid="uid://bsi3nyj5j7ygj" path="res://Assets/mainmenu/botonExitPressed.png" id="9_7b8ro"]
 [ext_resource type="Texture2D" uid="uid://dm5fjk5hvgudj" path="res://Assets/mainmenu/botonExitFocus.png" id="10_nn56h"]
 [ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="12_mrnl1"]
+[ext_resource type="Texture2D" uid="uid://dwh35sl3eq3oi" path="res://Assets/mainmenu/botonConfig1.png" id="12_nn56h"]
 [ext_resource type="AudioStream" uid="uid://m2ls8h1akbd8" path="res://Assets/sounds/SAVIA ANDINA  EL SIKURI.mp3" id="13_a12rv"]
+[ext_resource type="Texture2D" uid="uid://r1su73k0pxm8" path="res://Assets/mainmenu/botonConfig3.png" id="13_vgu78"]
+[ext_resource type="Texture2D" uid="uid://bagt0xu47ut50" path="res://Assets/mainmenu/botonConfig2.png" id="14_e4fgh"]
+[ext_resource type="Texture2D" uid="uid://cm7wxqctmjkdc" path="res://Assets/mainmenu/botonInfo1.png" id="15_12o5e"]
+[ext_resource type="Texture2D" uid="uid://cp5ni6kyfpdrn" path="res://Assets/mainmenu/botonInfo3.png" id="16_ajhae"]
+[ext_resource type="Texture2D" uid="uid://dkbmek0f25s1p" path="res://Assets/mainmenu/botonInfo2.png" id="17_aev2l"]
 
 [sub_resource type="Theme" id="Theme_5mndp"]
 default_font = ExtResource("12_mrnl1")
 default_font_size = 15
 
-[node name="MenuPrincipal" type="Control"]
+[node name="MenuPrincipal" type="Control" unique_id=1509911425]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5mndp")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=628963692]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.20392157, 0.16078432, 0.07450981, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=156807878]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -51,36 +57,54 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=586008056]
 layout_mode = 2
 texture = ExtResource("1_ul5lg")
 stretch_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1067798802]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 15
 
-[node name="BtnStart" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="BtnStart" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=529739848]
 layout_mode = 2
 texture_normal = ExtResource("2_5mndp")
 texture_pressed = ExtResource("3_mrnl1")
 texture_focused = ExtResource("4_a12rv")
 
-[node name="BtnReset" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="BtnReset" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=807581076]
 layout_mode = 2
 texture_normal = ExtResource("5_gnwr4")
 texture_pressed = ExtResource("6_ry77q")
 texture_focused = ExtResource("7_c4tro")
 
-[node name="BtnExit" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="BtnExit" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=359402499]
 layout_mode = 2
 texture_normal = ExtResource("8_0gx5w")
 texture_pressed = ExtResource("9_7b8ro")
 texture_focused = ExtResource("10_nn56h")
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=507156418]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnConfig" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=1799801080]
+layout_mode = 2
+texture_normal = ExtResource("12_nn56h")
+texture_pressed = ExtResource("13_vgu78")
+texture_focused = ExtResource("14_e4fgh")
+
+[node name="BtnInfo" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=866611337]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("15_12o5e")
+texture_pressed = ExtResource("16_ajhae")
+texture_focused = ExtResource("17_aev2l")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=223407391]
 title = "¡Atención!"
 initial_position = 2
 size = Vector2i(200, 132)
@@ -90,7 +114,7 @@ dialog_text = "¿Estás seguro de borrar todo tu progreso y empezar de cero?"
 dialog_autowrap = true
 cancel_button_text = "Cancelar"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1275881066]
 stream = ExtResource("13_a12rv")
 volume_db = -21.818
 autoplay = true

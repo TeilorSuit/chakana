@@ -2,6 +2,7 @@ extends Node2D
 
 @export var archivo_dialogo : DialogueResource 
 var jugador_cerca : bool = false
+const GLOBO_CHAKANA = preload("res://Scenes/globo_chakana/globo_chakana.tscn")
 
 func _ready() -> void:
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
@@ -9,12 +10,14 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if jugador_cerca and Input.is_action_just_pressed("ui_accept") and not Data.en_dialogo:
+		Data.en_dialogo = true
+		var globo = GLOBO_CHAKANA.instantiate()
+		get_tree().current_scene.add_child(globo)
+		
 		if Data.hablado_anciano_m1:
-			# Si ya habló con el anciano, lee el cartel normal
-			DialogueManager.show_example_dialogue_balloon(archivo_dialogo, "cartel_balanza")
+			globo.start(archivo_dialogo, "cartel_balanza")
 		else:
-			# Si NO ha hablado con el anciano, Sami dice que no entiende
-			DialogueManager.show_example_dialogue_balloon(archivo_dialogo, "cartel_bloqueado")
+			globo.start(archivo_dialogo, "cartel_bloqueado")
 			
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c0e82xe7hoiae"]
+
+[ext_resource type="Script" uid="uid://8vj34drh2pcc" path="res://Scripts/menu_opciones.gd" id="1_ak27g"]
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="1_sfdvg"]
+[ext_resource type="Texture2D" uid="uid://ce3qrekp3vp7g" path="res://Assets/mainmenu/botonHome.png" id="2_ak27g"]
+[ext_resource type="Texture2D" uid="uid://c8ber86w8hb47" path="res://Assets/mainmenu/botonHomePressed.png" id="3_6qom1"]
+[ext_resource type="Texture2D" uid="uid://bk1vq5riny3o1" path="res://Assets/mainmenu/botonHomeFocus.png" id="4_tebw5"]
+
+[sub_resource type="Theme" id="Theme_fcs44"]
+default_font = ExtResource("1_sfdvg")
+default_font_size = 21
+
+[node name="MenuOpciones" type="Control" unique_id=186107516]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ak27g")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=412846079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20392157, 0.16078432, 0.07450981, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1517716071]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer" unique_id=2058653637]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_fcs44")
+text = "Voz de Accesibilidad (TTS)"
+
+[node name="BtnHome" type="TextureButton" parent="VBoxContainer" unique_id=238019579]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_ak27g")
+texture_pressed = ExtResource("3_6qom1")
+texture_focused = ExtResource("4_tebw5")
+
+[connection signal="toggled" from="VBoxContainer/CheckButton" to="." method="_on_tts_toggled"]
+[connection signal="pressed" from="VBoxContainer/BtnHome" to="." method="_on_volver_pressed"]

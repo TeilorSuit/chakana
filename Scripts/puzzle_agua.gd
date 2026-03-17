@@ -7,7 +7,6 @@ extends Node2D
 @onready var palanca_centro: Area2D = $palancaVertical2
 @onready var palanca_der: Area2D = $palancaVertical3
 
-# ID de la puerta a abrir
 @export var puerta_id : int = 51
 
 var paso_actual = 0
@@ -16,9 +15,6 @@ func _ready():
 	resetear_puzzle()
 	
 	
-# --- LÓGICA DE SECUENCIA: Centro -> Derecha -> Izquierda ---
-
-# PALANCA 2 (Centro) - Debería ser la PRIMERA
 func _on_palanca_2_activada():
 	if paso_actual == 0: 
 		agua2.visible = true
@@ -26,7 +22,6 @@ func _on_palanca_2_activada():
 	else:
 		resetear_puzzle()
 
-# PALANCA 2 (Derecha) - SEGUNDA
 func _on_palanca_3_activada():
 	if paso_actual == 1: 
 		agua3.visible = true
@@ -34,9 +29,8 @@ func _on_palanca_3_activada():
 	else:
 		resetear_puzzle()
 		
-# PALANCA 1 (Izquierda) - Debería ser la TERCERA
 func _on_palanca_1_activada():
-	if paso_actual == 2: # ¿Es el turno correcto?
+	if paso_actual == 2: 
 		agua1.visible = true
 		Data.door_unlocked.emit(puerta_id)
 	else:

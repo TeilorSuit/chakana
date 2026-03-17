@@ -4,6 +4,7 @@ extends StaticBody2D
 
 @onready var anim_player = $AnimationPlayer
 @onready var collision = $CollisionShape2D
+@onready var audio_puerta = $AudioPuerta
 
 func _ready():
 	if Data.has_signal("door_unlocked"):
@@ -18,6 +19,7 @@ func open_door(id_received):
 	print("¡Puerta ", my_door_id, " activada!")
 	
 	if anim_player.has_animation("abrir"):
+		audio_puerta.play()
 		anim_player.play("abrir")
 	else:
 		print("ERROR: No existe la animación 'abrir'. Revisa el nombre en el AnimationPlayer.")

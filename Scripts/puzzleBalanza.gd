@@ -21,8 +21,6 @@ func _on_body_entered(body):
 		
 		Data.puzzle_resuelto = true
 		print("balanza resuelta")
-		# Opcional: desactivar la colisión para que no vuelva a detectar
-		# $CollisionShape2D.set_deferred("disabled", true) 
 	
 	elif body.name == "Player" and Data.rocas_coleccionadas < 3:
 		print("Faltan rocas. Tienes: ", Data.rocas_coleccionadas)

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://thqiq44v3gd8" path="res://Assets/level1/nivel1 tileset.png" id="2_c5erv"]
 [ext_resource type="PackedScene" uid="uid://cj7b3m4offpny" path="res://Scenes/Player.tscn" id="2_vly50"]
 [ext_resource type="PackedScene" uid="uid://cis3diamjl2x3" path="res://Scenes/chakana_part.tscn" id="3_c5erv"]
-[ext_resource type="PackedScene" uid="uid://x2t2ej2cbrrv" path="res://Scenes/UI.tscn" id="4_lyd6k"]
+[ext_resource type="PackedScene" uid="uid://dexq04hxaocpb" path="res://Scenes/UI.tscn" id="4_lyd6k"]
 [ext_resource type="PackedScene" uid="uid://biayi41msgtai" path="res://Scenes/killzone.tscn" id="5_y4dr7"]
 [ext_resource type="PackedScene" uid="uid://dff8ham64vyag" path="res://Scenes/npcoldperson.tscn" id="6_didp7"]
 [ext_resource type="Texture2D" uid="uid://b0t8q6e8788ig" path="res://Assets/level1/3er layer.png" id="7_2a60c"]
@@ -21,6 +21,8 @@
 [ext_resource type="Resource" uid="uid://c8jkwta1yxxtu" path="res://dialogos/anciano_dialogos.dialogue" id="18_esggg"]
 [ext_resource type="PackedScene" uid="uid://cqlgmc5y2wh6j" path="res://Scenes/menu_pausa.tscn" id="20_mcj63"]
 [ext_resource type="AudioStream" uid="uid://56ut73evx7do" path="res://Assets/sounds/005. Ruins - lvl1.mp3" id="21_af2a1"]
+[ext_resource type="FontFile" uid="uid://cmto831opoqwb" path="res://Assets/m5x7.ttf" id="22_ocmlb"]
+[ext_resource type="PackedScene" uid="uid://dff8oms334jhq" path="res://Scenes/transicion_nivel.tscn" id="23_tlxhh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyd6k"]
 texture = ExtResource("2_c5erv")
@@ -71,6 +73,14 @@ sources/1 = SubResource("TileSetAtlasSource_lyd6k")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpkqv"]
 size = Vector2(56, 67)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tlxhh"]
+font = ExtResource("22_ocmlb")
+font_size = 18
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocmlb"]
+size = Vector2(132, 80)
+
 [node name="level1" type="Node2D" unique_id=874668686]
 script = ExtResource("1_nolpu")
 
@@ -80,7 +90,7 @@ tile_map_data = PackedByteArray("AAAiABkAAQACAAEAAAAjABkAAQACAAEAAAAkABkAAQACAAE
 tile_set = SubResource("TileSet_c5erv")
 
 [node name="Player" parent="." unique_id=699188688 instance=ExtResource("2_vly50")]
-position = Vector2(314, 521)
+position = Vector2(266, 521)
 
 [node name="chakana part" parent="." unique_id=1589563632 instance=ExtResource("3_c5erv")]
 position = Vector2(1978, 199)
@@ -160,14 +170,14 @@ position = Vector2(1818, 208)
 my_door_id = 50
 
 [node name="roca" parent="." unique_id=1840663504 instance=ExtResource("14_u1b78")]
-position = Vector2(1978, 434)
+position = Vector2(1966.0001, 434)
 rotation = 0.31300047
 
 [node name="roca2" parent="." unique_id=678904284 instance=ExtResource("14_u1b78")]
-position = Vector2(1030, 530)
+position = Vector2(1494, 546)
 
 [node name="roca3" parent="." unique_id=1859440817 instance=ExtResource("14_u1b78")]
-position = Vector2(1626, 562)
+position = Vector2(1558, 402)
 
 [node name="cambio" parent="." unique_id=139885321 instance=ExtResource("16_wwu6c")]
 position = Vector2(2327, 106)
@@ -184,4 +194,38 @@ stream = ExtResource("21_af2a1")
 volume_db = -20.0
 autoplay = true
 
+[node name="LabelMoverse" type="Label" parent="." unique_id=314036168]
+offset_left = 255.0
+offset_top = 463.00003
+offset_right = 355.0
+offset_bottom = 514.0
+rotation = -0.12165591
+text = "Presione
+\"A y D\" o Flechas
+para moverse"
+label_settings = SubResource("LabelSettings_tlxhh")
+horizontal_alignment = 1
+
+[node name="LabelSaltar" type="Label" parent="." unique_id=1235398886]
+offset_left = 836.00006
+offset_top = 474.00003
+offset_right = 984.00006
+offset_bottom = 525.0
+rotation = -0.12165591
+text = "Presione
+\"W\" o Flecha hacia arriba
+para saltar"
+label_settings = SubResource("LabelSettings_tlxhh")
+horizontal_alignment = 1
+
+[node name="ZonaTutorialSalto" type="Area2D" parent="." unique_id=1312024545]
+position = Vector2(725, 520)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaTutorialSalto" unique_id=752996268]
+position = Vector2(62, -24)
+shape = SubResource("RectangleShape2D_ocmlb")
+
+[node name="TransicionNivel" parent="." unique_id=1295748132 instance=ExtResource("23_tlxhh")]
+
 [connection signal="body_entered" from="PuzzleBalanza" to="PuzzleBalanza" method="_on_body_entered"]
+[connection signal="body_entered" from="ZonaTutorialSalto" to="." method="_on_zona_tutorial_salto_body_entered"]

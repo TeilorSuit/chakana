@@ -3,9 +3,9 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		var cam = get_parent() # Agarra la Camera2D
-		cam.enabled = true # FORZAMOS que se encienda
-		cam.make_current() # Hacemos que sea la principal
+		var cam = get_parent() 
+		cam.enabled = true 
+		cam.make_current() 
 		background_entero.visible = true;
 
 func _on_body_exited(body: Node2D) -> void:

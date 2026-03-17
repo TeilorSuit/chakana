@@ -4,9 +4,8 @@ extends CanvasLayer
 @onready var btn_resumir = $Contenedor/VBoxContainer/HBoxContainer/BtnResumir
 
 func _ready():
-	contenedor.visible = false # Empieza oculto
+	contenedor.visible = false 
 	
-	# Conectamos señales
 	$Contenedor/VBoxContainer/HBoxContainer/BtnResumir.pressed.connect(despausar)
 	$Contenedor/VBoxContainer/HBoxContainer/BtnHome.pressed.connect(_on_home_pressed)
 	$Contenedor/VBoxContainer/HBoxContainer/BtnSalir.pressed.connect(func(): get_tree().quit())
@@ -21,12 +20,12 @@ func _input(event):
 func pausar():
 	get_tree().paused = true
 	contenedor.visible = true
-	btn_resumir.grab_focus() # Para que el teclado funcione de una
+	btn_resumir.grab_focus() 
 
 func despausar():
 	get_tree().paused = false
 	contenedor.visible = false
 
 func _on_home_pressed():
-	get_tree().paused = false # ¡IMPORTANTE! Despausar antes de cambiar de escena
+	get_tree().paused = false 
 	get_tree().change_scene_to_file("res://Scenes/menu_principal.tscn")

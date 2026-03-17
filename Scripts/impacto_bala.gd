@@ -1,4 +1,3 @@
-# impacto_bala.gd
 extends AnimatedSprite2D
 
 func _ready():

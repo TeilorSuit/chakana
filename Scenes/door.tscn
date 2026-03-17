@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cogdyhf2244wl"]
+[gd_scene format=3 uid="uid://cogdyhf2244wl"]
 
 [ext_resource type="Script" uid="uid://bidgmqp3ybgxb" path="res://Scripts/door.gd" id="1_p0e35"]
 [ext_resource type="Texture2D" uid="uid://bcs2lxxk4qwf6" path="res://Assets/variados/puertaRejasAnimacion.png" id="2_p0e35"]
+[ext_resource type="AudioStream" uid="uid://dhs1864b6e2c4" path="res://Assets/sounds/sfx door piedra.mp3" id="3_fahql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ab4ky"]
 size = Vector2(25, 48)
@@ -57,18 +58,20 @@ _data = {
 &"abrir": SubResource("Animation_fahql")
 }
 
-[node name="Door" type="StaticBody2D"]
+[node name="Door" type="StaticBody2D" unique_id=379512408]
 script = ExtResource("1_p0e35")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2104185805]
 texture = ExtResource("2_p0e35")
 hframes = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1672406505]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_ab4ky")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ab4ky")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1354788116]
+libraries/ = SubResource("AnimationLibrary_ab4ky")
+
+[node name="AudioPuerta" type="AudioStreamPlayer2D" parent="." unique_id=293371697]
+stream = ExtResource("3_fahql")
+volume_db = -25.882

@@ -1,8 +1,9 @@
 extends Node2D
 
-@export var numero_mundo : int = 1 # Para saber en qué nivel estamos
-@export var archivo_dialogo : DialogueResource # Arrastraremos el archivo .dialogue aquí
-@export var nodo_chakana : Area2D # Aquí asignaremos la Chakana que ya está en tu nivel
+@export var numero_mundo : int = 1 
+@export var archivo_dialogo : DialogueResource 
+@export var nodo_chakana : Area2D 
+const GLOBO_CHAKANA = preload("res://Scenes/globo_chakana/globo_chakana.tscn")
 
 var jugador_cerca : bool = false
 
@@ -22,12 +23,17 @@ func _process(_delta: float) -> void:
 		iniciar_dialogo()
 
 func iniciar_dialogo():
+	Data.en_dialogo = true
+	
+	var globo = GLOBO_CHAKANA.instantiate()
+	get_tree().current_scene.add_child(globo)
+	
 	if numero_mundo == 1:
-		DialogueManager.show_example_dialogue_balloon(archivo_dialogo, "inicio_nivel_1")
+		globo.start(archivo_dialogo, "inicio_nivel_1")
 	elif numero_mundo == 2:
-		DialogueManager.show_example_dialogue_balloon(archivo_dialogo, "inicio_nivel_2")
+		globo.start(archivo_dialogo, "inicio_nivel_2")
 	elif numero_mundo == 3:
-		DialogueManager.show_example_dialogue_balloon(archivo_dialogo, "inicio_nivel_3")
+		globo.start(archivo_dialogo, "inicio_nivel_3")
 		
 # --- SEÑALES DEL AREA2D ---
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -60,5 +66,5 @@ func _on_dialogue_ended(_resource: DialogueResource):
 func _on_aparecer_chakana():
 	if numero_mundo == 2 and nodo_chakana:
 		nodo_chakana.visible = true
-		nodo_chakana.set_deferred("monitoring", true) # Activa la colisión para agarrarla
+		nodo_chakana.set_deferred("monitoring", true) 
 		print("¡El anciano ha revelado la Chakana!")

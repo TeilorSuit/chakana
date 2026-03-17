@@ -57,16 +57,17 @@ else:
 
 if not Data.hablado_anciano_m3:
 	Anciano: Has llegado a lo más alto, Sami. Al [color=yellow]Hanan Pacha[/color], el mundo superior... el cielo.
-	Sami: Se siente una energía muy pesada... Y no hay luz, el cielo está completamente vacío.
+	Sami: Se siente una energía muy pesada... Casi no hay luz, el cielo está completamente vacío.
 	Anciano: [color=red]La Entidad[/color] se esconde aquí. Para dejarnos en la oscuridad, ha movido al Sol y a la Luna de sus lugares.
 	Anciano: El gran [color=yellow]Cóndor[/color], guardián de estos cielos, no puede volar sin la luz de los astros.
-	Anciano: Solo te falta un fragmento de la [color=cyan]Chakana[/color]. Para que aparezca, debes empujar las cajas del Sol y la Luna sobre sus respectivos botones.
-	Anciano: Resuelve este último enigma. Cuando el orden vuelva, la [color=cyan]Chakana[/color] estará completa y podrás hacerle frente a la sombra.
+	Anciano: Solo te falta un fragmento de la [color=cyan]Chakana[/color]. Para acceder a él, debes poner cada caja en su lugar.
+	Anciano: Si te equivocas o te quedas sin salida, no te preocupes. Tira de la palanca para devolver todo a su lugar.
+	Anciano: Resuelve este último enigma. ¡Tú puedes!
 	set Data.hablado_anciano_m3 = true
 	=> END
 else:
 	if not Data.puzzle_cajas_resuelto:
-		Anciano: El cielo sigue oscuro, Sami. Empuja las cajas del Sol y la Luna sobre sus botones para restaurar el orden.
+		Anciano: El cielo sigue oscuro, Sami. Empuja las cajas hacia los botones de su mismo color. Y recuerda usar la palanca si necesitas intentarlo de nuevo.
 		=> END
 	elif Data.chakana_parts < 3:
 		Anciano: ¡La luz ha vuelto! Pero aún necesitas recoger el último fragmento de la [color=cyan]Chakana[/color]. Búscalo, debe estar cerca.
@@ -80,8 +81,7 @@ else:
 		
 		
 ~ cartel_balanza
-
-Cartel: "El equilibrio es la clave. Tres cargas a la derecha, tres cargas a la izquierda. Solo así el camino se revelará."
+Cartel: "¡La balanza necesita el mismo peso en ambos lados! Busca por la cueva, coloca tres rocas en el plato izquierdo para abrir la puerta."
 set Data.leyo_cartel_balanza = true
 => END
 
