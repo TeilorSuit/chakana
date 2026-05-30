@@ -36,4 +36,6 @@ El juego está diseñado para ser controlado enteramente mediante el teclado:
 * **'Z' o 'J':** Disparar (cuando esté disponible).
 
 ---
-*Desarrollado por: Loor Medranda  Marlon*
+*Desarrollado por: Loor Medranda Marlon*
+
+*Colaborador: Reinoso Vélez Eduardo*
